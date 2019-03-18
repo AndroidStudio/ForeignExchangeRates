@@ -56,8 +56,13 @@ class ExchangeRatesViewModel : ViewModel() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(::mapResponse)
+                .map (::filterPLN)
                 .subscribe({ success(it) }, { error(it) })
         )
+    }
+
+    private fun filterPLN(list: List<ExchangeRateModel>): List<ExchangeRateModel> {
+        return list.filter { it.name == "PLN" }
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)

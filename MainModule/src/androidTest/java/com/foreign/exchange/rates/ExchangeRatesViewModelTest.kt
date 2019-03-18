@@ -66,6 +66,7 @@ class ExchangeRatesViewModelTest {
             .getExchangeRates("2019-01-26", "PLN")
             .map { viewModel.mapResponse(it) }
             .blockingGet()
+
         assertThat(list.size, not(0))
     }
 }
