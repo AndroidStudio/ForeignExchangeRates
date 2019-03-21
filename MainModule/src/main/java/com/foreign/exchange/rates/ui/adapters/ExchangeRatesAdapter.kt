@@ -18,7 +18,7 @@ class ExchangeRatesAdapter(context: Context) :
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
-    var list: List<ExchangeRateModel> = listOf()
+    var list: MutableList<ExchangeRateModel> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -41,6 +41,11 @@ class ExchangeRatesAdapter(context: Context) :
 
     override fun onBindViewHolder(holder: ExchangeViewHolder, position: Int) {
         holder.onBind(list[position])
+    }
+
+    fun clear() {
+        list.clear()
+        notifyDataSetChanged()
     }
 
     class ExchangeViewHolder(view: View, private val currency: String) : RecyclerView.ViewHolder(view) {

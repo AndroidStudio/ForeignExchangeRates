@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ForeignExchangeRates.iml" filepath="$PROJECT_DIR$/ForeignExchangeRates.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ForeignExchangeRatesAndroid.iml" filepath="$PROJECT_DIR$/ForeignExchangeRatesAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/MainModule/MainModule.iml" filepath="$PROJECT_DIR$/MainModule/MainModule.iml" />
     </modules>
   </component>

@@ -62,7 +62,7 @@ class ExchangeRatesViewModelTest {
 
     @Test
     fun getExchangeRates() {
-        val list = viewModel.remoteRepository
+        val list = viewModel.exchangeRepo
             .getExchangeRates("2019-01-26", "PLN")
             .map { viewModel.mapResponse(it) }
             .blockingGet()

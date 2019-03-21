@@ -15,6 +15,7 @@ import com.foreign.exchange.rates.models.ExchangeRateModel
 import com.foreign.exchange.rates.ui.adapters.ExchangeRatesAdapter
 import com.foreign.exchange.rates.viewmodel.ExchangeRatesViewModel
 import kotlinx.android.synthetic.main.exchange_rate_fragment.view.*
+import timber.log.Timber
 
 class ExchangeRateListFragment : Fragment() {
 
@@ -34,25 +35,28 @@ class ExchangeRateListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        exchangeAdapter.clear()
+
         view.recyclerView.layoutManager = LinearLayoutManager(context)
         view.recyclerView.adapter = exchangeAdapter
-
+        view.progressBar?.visibility = View.GONE
         loadRates()
     }
 
     private fun loadRates() {
+        view?.progressBar?.visibility = View.VISIBLE
         val date = arguments?.getString(BASE_DATE)
         date?.let {
             exchangeRatesViewModel.getExchangeRates(it, this::success, this::error)
         }
     }
 
-    private fun success(list: List<ExchangeRateModel>) {
+    private fun success(list: MutableList<ExchangeRateModel>) {
         view?.progressBar?.visibility = View.GONE
         exchangeAdapter.list = list
     }
 
     private fun error(error: Throwable) {
-
+        Timber.d("ExchangeRateListFragment error: %s", error.printStackTrace())
     }
 }
