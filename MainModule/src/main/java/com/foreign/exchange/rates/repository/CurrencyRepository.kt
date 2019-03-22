@@ -9,8 +9,6 @@ import javax.inject.Inject
 class CurrencyRepository @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
     fun setCurrency(currency: String) {
-
-
         sharedPreferences.edit { putString(BASE_CURRENCY, currency) }
         Timber.d("CurrencyRepository setCurrency %s", currency)
     }
