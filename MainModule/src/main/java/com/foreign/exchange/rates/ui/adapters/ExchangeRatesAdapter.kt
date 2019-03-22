@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.foreign.exchange.rates.R
 import com.foreign.exchange.rates.models.ExchangeRateModel
-import com.foreign.exchange.rates.viewmodel.ExchangeRatesViewModel
+import com.foreign.exchange.rates.repository.CurrencyRepository
 import kotlinx.android.synthetic.main.exchange_rate_list_item.view.*
+import javax.inject.Inject
 
-class ExchangeRatesAdapter(context: Context) :
+class ExchangeRatesAdapter @Inject constructor(context: Context, currencyRepository: CurrencyRepository) :
     RecyclerView.Adapter<ExchangeRatesAdapter.ExchangeViewHolder>() {
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
@@ -24,9 +23,7 @@ class ExchangeRatesAdapter(context: Context) :
             notifyDataSetChanged()
         }
 
-    private var currency: String = ViewModelProviders
-        .of(context as FragmentActivity)
-        .get(ExchangeRatesViewModel::class.java).getCurrency()
+    private var currency: String = currencyRepository.getCurrency()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExchangeViewHolder {
         return ExchangeViewHolder(

@@ -53,7 +53,7 @@ class ExchangeRatesViewModel : ViewModel() {
     ) {
         compositeDisposable.add(webService.call(
             ExchangeRateRepository.API::class.java,
-            createRetrofit = { it.getExchangeRates(date, getCurrency()) })
+            repo = { it.getExchangeRates(date, getCurrency()) })
             .map { exchangeRepo.mapResponse(it) }
             .map { exchangeRepo.filterPLN(it) }
             .subscribeOn(Schedulers.io())

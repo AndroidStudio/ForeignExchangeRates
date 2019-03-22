@@ -30,9 +30,9 @@ class WebService @Inject constructor(context: Context) {
                 as? ConnectivityManager
     }
 
-    fun <T> call(repository: Class<T>, createRetrofit: (T) -> Single<Response<ResponseBody>>): Single<String> {
-        val request = createRetrofit(retrofit.create(repository))
-        return isInternetConnection()
+    fun <T> call(repository: Class<T>, repo: (T) -> Single<Response<ResponseBody>>): Single<String> {
+        val request = repo(retrofit.create(repository))
+        return checkInternetConnection()
             .flatMap { request }
             .flatMap { mapResponse(it) }
     }
@@ -57,7 +57,7 @@ class WebService @Inject constructor(context: Context) {
             .build()
     }
 
-    private fun isInternetConnection(): Single<Boolean> {
+    private fun checkInternetConnection(): Single<Boolean> {
         return Single.create {
             val activeNetwork = connectivityManager?.activeNetworkInfo
             if (activeNetwork != null && activeNetwork.isConnected) {

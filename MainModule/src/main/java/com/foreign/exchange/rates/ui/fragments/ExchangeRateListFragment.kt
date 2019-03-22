@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.foreign.exchange.rates.ExchangeRatesApplication
 import com.foreign.exchange.rates.R
 import com.foreign.exchange.rates.constants.BASE_DATE
 import com.foreign.exchange.rates.models.ExchangeRateModel
@@ -16,17 +17,25 @@ import com.foreign.exchange.rates.ui.adapters.ExchangeRatesAdapter
 import com.foreign.exchange.rates.viewmodel.ExchangeRatesViewModel
 import kotlinx.android.synthetic.main.exchange_rate_fragment.view.*
 import timber.log.Timber
+import javax.inject.Inject
 
 class ExchangeRateListFragment : Fragment() {
 
     private lateinit var exchangeRatesViewModel: ExchangeRatesViewModel
-    private val exchangeAdapter: ExchangeRatesAdapter by lazy { ExchangeRatesAdapter(context!!) }
+
+    @Inject
+    lateinit var exchangeAdapter: ExchangeRatesAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         exchangeRatesViewModel = ViewModelProviders
             .of(context as FragmentActivity)
             .get(ExchangeRatesViewModel::class.java)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        ExchangeRatesApplication.appComponent.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
