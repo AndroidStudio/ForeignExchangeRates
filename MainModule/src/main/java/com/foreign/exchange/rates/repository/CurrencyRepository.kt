@@ -10,6 +10,9 @@ class CurrencyRepository @Inject constructor(private val sharedPreferences: Shar
 
     val c = 5
 
+    val a = 5
+    val b = 5
+
     fun setCurrency(currency: String) {
         sharedPreferences.edit { putString(BASE_CURRENCY, currency) }
         Timber.d("CurrencyRepository setCurrency %s", currency)
