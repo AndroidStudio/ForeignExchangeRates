@@ -9,7 +9,6 @@ import javax.inject.Inject
 class CurrencyRepository @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
     val c = 5
-
     val a = 5
     val b = 5
 
