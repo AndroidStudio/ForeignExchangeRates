@@ -15,6 +15,7 @@ class CurrencyRepository @Inject constructor(private val sharedPreferences: Shar
 
     fun getCurrency(): String {
 
+
         return sharedPreferences.getString(BASE_CURRENCY, "EUR") ?: "EUR"
     }
 }
