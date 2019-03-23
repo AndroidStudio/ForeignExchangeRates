@@ -12,8 +12,9 @@ import com.foreign.exchange.rates.repository.CurrencyRepository
 import kotlinx.android.synthetic.main.exchange_rate_list_item.view.*
 import javax.inject.Inject
 
-class ExchangeRatesAdapter @Inject constructor(context: Context, currencyRepository: CurrencyRepository) :
-    RecyclerView.Adapter<ExchangeRatesAdapter.ExchangeViewHolder>() {
+class ExchangeRatesAdapter @Inject constructor(
+    context: Context, currencyRepository: CurrencyRepository
+) : RecyclerView.Adapter<ExchangeRatesAdapter.ExchangeViewHolder>() {
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -27,8 +28,7 @@ class ExchangeRatesAdapter @Inject constructor(context: Context, currencyReposit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExchangeViewHolder {
         return ExchangeViewHolder(
-            layoutInflater.inflate(R.layout.exchange_rate_list_item, parent, false),
-            currency
+            layoutInflater.inflate(R.layout.exchange_rate_list_item, parent, false), currency
         )
     }
 

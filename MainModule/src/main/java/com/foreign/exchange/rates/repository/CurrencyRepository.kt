@@ -8,16 +8,12 @@ import javax.inject.Inject
 
 class CurrencyRepository @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
-    val a = 5
-    val b = 5
-    val c = 5
-
     fun setCurrency(currency: String) {
         sharedPreferences.edit { putString(BASE_CURRENCY, currency) }
         Timber.d("CurrencyRepository setCurrency %s", currency)
     }
 
     fun getCurrency(): String {
-        return sharedPreferences.getString(BASE_CURRENCY, "EUR")!!
+        return sharedPreferences.getString(BASE_CURRENCY, "EUR") ?: "EUR"
     }
 }

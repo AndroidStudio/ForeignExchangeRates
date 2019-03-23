@@ -23,8 +23,8 @@ class ExchangeRateListFragment : Fragment() {
 
     private lateinit var exchangeRatesViewModel: ExchangeRatesViewModel
 
-    @Inject
-    lateinit var exchangeAdapter: ExchangeRatesAdapter
+    @set:Inject
+    var exchangeAdapter: ExchangeRatesAdapter? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,7 +44,7 @@ class ExchangeRateListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        exchangeAdapter.clear()
+        exchangeAdapter?.clear()
 
         view.recyclerView.layoutManager = LinearLayoutManager(context)
         view.recyclerView.adapter = exchangeAdapter
@@ -62,10 +62,15 @@ class ExchangeRateListFragment : Fragment() {
 
     private fun success(list: MutableList<ExchangeRateModel>) {
         view?.progressBar?.visibility = View.GONE
-        exchangeAdapter.list = list
+        exchangeAdapter?.list = list
     }
 
     private fun error(error: Throwable) {
         Timber.d("ExchangeRateListFragment error: %s", error.printStackTrace())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.d("ExchangeRateListFragment %s", "fragment destroy")
     }
 }
