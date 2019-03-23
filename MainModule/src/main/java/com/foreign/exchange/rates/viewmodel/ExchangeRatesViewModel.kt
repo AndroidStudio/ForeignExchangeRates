@@ -55,7 +55,7 @@ class ExchangeRatesViewModel : ViewModel() {
             ExchangeRateRepository.API::class.java,
             repo = { it.getExchangeRates(date, getCurrency()) })
             .map { exchangeRepo.mapResponse(it) }
-            .map { exchangeRepo.filterPLN(it) }
+            //.map { exchangeRepo.filterPLN(it) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ success(it) }, { error(it) })

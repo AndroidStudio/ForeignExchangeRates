@@ -10,6 +10,7 @@ import com.foreign.exchange.rates.R
 import com.foreign.exchange.rates.models.ExchangeRateModel
 import com.foreign.exchange.rates.repository.CurrencyRepository
 import kotlinx.android.synthetic.main.exchange_rate_list_item.view.*
+import java.util.*
 import javax.inject.Inject
 
 class ExchangeRatesAdapter @Inject constructor(
@@ -43,6 +44,11 @@ class ExchangeRatesAdapter @Inject constructor(
     fun clear() {
         list.clear()
         notifyDataSetChanged()
+    }
+
+    fun swapItems(fromPosition: Int, toPosition: Int) {
+        Collections.swap(list, fromPosition, toPosition)
+        notifyItemMoved(fromPosition,toPosition)
     }
 
     class ExchangeViewHolder(view: View, private val currency: String) : RecyclerView.ViewHolder(view) {

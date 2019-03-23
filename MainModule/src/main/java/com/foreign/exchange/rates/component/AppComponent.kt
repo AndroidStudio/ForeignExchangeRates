@@ -17,6 +17,7 @@ interface AppComponent {
 
         @BindsInstance
         fun context(context: Context): Builder
+
     }
 
     fun inject(exchangeRatesViewModel: ExchangeRatesViewModel)

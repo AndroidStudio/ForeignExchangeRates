@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.foreign.exchange.rates.ExchangeRatesApplication
 import com.foreign.exchange.rates.R
 import com.foreign.exchange.rates.constants.BASE_DATE
@@ -46,10 +49,33 @@ class ExchangeRateListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         exchangeAdapter?.clear()
 
+        view.recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         view.recyclerView.layoutManager = LinearLayoutManager(context)
         view.recyclerView.adapter = exchangeAdapter
         view.progressBar?.visibility = View.GONE
+
+        getItemTouchHelper().attachToRecyclerView(view.recyclerView)
+
         loadRates()
+    }
+
+    private fun getItemTouchHelper(): ItemTouchHelper {
+        return ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                exchangeAdapter?.swapItems(viewHolder.adapterPosition, target.adapterPosition)
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+            }
+        })
     }
 
     private fun loadRates() {

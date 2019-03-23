@@ -21,10 +21,4 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:textSize="30dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#d2d2d2"
-        android:layout_below="@+id/rateTextView" />
 </RelativeLayout>
