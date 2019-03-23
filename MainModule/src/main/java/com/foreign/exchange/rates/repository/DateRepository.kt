@@ -7,7 +7,6 @@ import javax.inject.Inject
 class DateRepository @Inject constructor() {
 
     fun getDateList(): ArrayList<String> {
-
         val list = arrayListOf<String>()
 
         val startDate: Calendar = Calendar.getInstance()
